@@ -1,15 +1,15 @@
 Project iterations:
-- get wheather data from a 3rd party api
+- [x] get wheather data from a 3rd party api (/)
     - any data, just have access and fetch something at this point
-- create cloud infra (google cloud function)
-- add github actions workflow to deploy after each commit
-- create some visualisation
+- [ ] create cloud infra (google cloud function)
+- [ ] add github actions workflow to deploy after each commit
+- [ ] create some visualisation
     - either map, or just text and images for hailstorm
     - use angular for the frontend
-- add login functionality
+- [ ] add login functionality
     - at this point users can see everything regardless of login
     - save user data e.g. in a postgres db (on gcp)
-- add hailstorm alert functionality
+- [ ] add hailstorm alert functionality
     - extend frontend with additional view/button
     - store data in db for user alerts
     - create recurring job to send alerts to users
@@ -18,10 +18,10 @@ Project iterations:
         - sends users email
 
 For each iteration:
-- create automatic tests
+- [ ] create automatic tests
     - I don't think test env in CI is necessary
 
 Additional learning objectives:
-- think through logging
+- [ ] think through logging
     - e.g. you can't log user data, so logging should be aligned to environment (prod, test)
-- use comments where code takes surprising turns
+- [ ] use comments where code takes surprising turns

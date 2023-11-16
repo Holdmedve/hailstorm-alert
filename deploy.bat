@@ -6,4 +6,5 @@ gcloud functions deploy weather-reporto ^
 --entry-point=HelloHTTP ^
 --trigger-http ^
 --allow-unauthenticated ^
---ingress-settings=all
+--ingress-settings=all ^
+--set-env-vars WEATHER_API_KEY=%WEATHER_API_KEY%

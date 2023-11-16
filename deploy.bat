@@ -1,8 +1,9 @@
-gcloud functions deploy weather-status ^
+gcloud functions deploy weather-reporto ^
 --gen2 ^
 --region=europe-west6 ^
 --runtime=go121 ^
 --source=. ^
---entry-point=helloHTTP ^
+--entry-point=HelloHTTP ^
 --trigger-http ^
---allow-unauthenticated
+--allow-unauthenticated ^
+--ingress-settings=all

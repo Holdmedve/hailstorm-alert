@@ -15,5 +15,5 @@
 
 node_modules
 
-deploy.bat
+go.mod
 README.md

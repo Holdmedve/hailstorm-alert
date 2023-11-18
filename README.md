@@ -1,7 +1,7 @@
 Project iterations:
 - [x] get wheather data from a 3rd party api (/)
     - any data, just have access and fetch something at this point
-- [ ] create cloud infra (google cloud function)
+- [x] create cloud infra (google cloud function)
     - create deploy script for the application that is run locally
     - set api key in deploy script, but not as plain text
 - [ ] create some visualisation

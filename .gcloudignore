@@ -15,5 +15,7 @@
 
 node_modules
 
+index.yaml
+local-serve.bat
 go.mod
 README.md

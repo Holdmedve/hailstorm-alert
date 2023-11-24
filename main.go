@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -14,6 +15,16 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprint(w, "Hello, World!")
+
+	apiKey, ok := os.LookupEnv("WEATHER_API_KEY")
+	if !ok {
+		fmt.Println("You forgot to set the api key in the env var")
+	}
+
+	resp, err := http.Get("http://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=London&aqi=no")
+	bodyBytes, err := io.ReadAll(resp.Body)
+	fmt.Fprint(w, string(bodyBytes))
+	fmt.Fprint(w, err)
 }
 
 func main() {

@@ -1,1 +1,1 @@
-python "<SET-THIS-PATH>\Google\Cloud SDK\google-cloud-sdk\bin\dev_appserver.py" .
+python  "%GOOGLE_SDK_PATH%\bin\dev_appserver.py" .

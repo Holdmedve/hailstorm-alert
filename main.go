@@ -45,6 +45,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", indexHandler)
+	http.Handle(
+		"/stuff/",
+		http.StripPrefix("/stuff/", http.FileServer(http.Dir("./static"))),
+	)
 
 	port := os.Getenv("PORT")
 	if port == "" {

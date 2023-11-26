@@ -21,10 +21,12 @@ Project iterations:
         - job checks db and whether data
         - sends users email
 
+<br></br>
 For each iteration:
 - [ ] create automatic tests
     - I don't think test env in CI is necessary
 
+<br></br>
 Additional learning objectives:
 - [ ] think through logging
     - e.g. you can't log user data, so logging should be aligned to environment (prod, test)
@@ -33,9 +35,6 @@ Additional learning objectives:
     https://quii.gitbook.io/learn-go-with-tests/testing-fundamentals/working-without-mocks#the-problem-with-stubs-and-mocks
 - [ ] write your own code instead of using the ```jason``` package
 
-
-<br></br>
-for local development set the ```%GOOGLE_SDK_PATH%``` environment variable and then call ```local-serve.bat```
 
 <br></br>
 for production deployment copy ```incomplete_app.yaml``` as ```app.yaml``` and set the missing values then run ```gcloud app deploy --quiet```

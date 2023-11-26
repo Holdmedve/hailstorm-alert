@@ -11,22 +11,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// indexHandler responds to requests with our greeting.
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.NotFound(w, r)
-		return
-	}
-	fmt.Fprint(w, "Hello, World!")
+func asd(c *gin.Context) {
+	fmt.Println("asd has been called")
+}
 
+func index(c *gin.Context) {
 	apiKey, ok := os.LookupEnv("WEATHER_API_KEY")
 	if !ok {
 		fmt.Println("You forgot to set the api key in the env var")
+		return
 	}
 
 	resp, err := http.Get("http://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=London&aqi=no")
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
 	defer resp.Body.Close()
 
@@ -38,24 +37,17 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(uff)
 	}
 
-	fmt.Printf("type: %T, value:%f", temp, temp)
 	displayTemp := strconv.FormatFloat(temp, 'g', -1, 64)
-	fmt.Fprint(w, "\nThe temperature in London is: ", displayTemp, "C°")
 
-}
-
-func asd(c *gin.Context) {
-	fmt.Println("asd has been called")
-}
-
-func dsa(c *gin.Context) {
-	fmt.Println("dsa has been called")
+	c.HTML(http.StatusOK, "index.tmpl", gin.H{"title": "Hello bello", "temp": displayTemp})
 }
 
 func main() {
 	router := gin.New()
+	router.LoadHTMLGlob("templates/*")
+
 	router.GET("/stuff", asd)
-	router.GET("/", dsa)
+	router.GET("/", index)
 	http.Handle("/", router)
 
 	port := os.Getenv("PORT")

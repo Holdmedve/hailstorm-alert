@@ -1,1 +1,2 @@
-python  "%GOOGLE_SDK_PATH%\bin\dev_appserver.py" .
+go build
+.\main.exe

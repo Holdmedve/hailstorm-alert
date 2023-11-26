@@ -5,4 +5,19 @@
     <p>
         The temperature in London is {{ .temp }} C°.
     </p>
+
+    <label for="cities">Choose a city:</label>
+
+    <select name="cities" id="cities" onchange="asd(this.value)">
+        <option value="London">London</option>
+        <option value="Budapest">Budapest</option>
+        <option value="Salzburg">Salzburg</option>
+    </select>
 </html>
+
+<script>
+function asd(val) {
+    console.log("select has been used");
+    console.log(val);
+}
+</script>

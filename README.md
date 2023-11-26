@@ -37,4 +37,4 @@ Additional learning objectives:
 
 
 <br></br>
-for production deployment copy ```incomplete_app.yaml``` as ```app.yaml``` and set the missing values then run ```gcloud app deploy --quiet```
+for production deployment copy ```incomplete_app.yaml``` as ```app.yaml``` and set the missing values then run ```deploy.bat```

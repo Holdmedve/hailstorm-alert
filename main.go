@@ -30,7 +30,6 @@ func index(c *gin.Context) {
 	defer resp.Body.Close()
 
 	v, err := jason.NewObjectFromReader(resp.Body)
-	fmt.Println(v.GetValue("current"))
 
 	temp, uff := v.GetFloat64("current", "temp_c")
 	if uff != nil {

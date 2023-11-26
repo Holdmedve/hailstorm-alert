@@ -56,22 +56,15 @@ func main() {
 	router := gin.New()
 	router.GET("/stuff", asd)
 	router.GET("/", dsa)
-	router.Run("localhost:8080")
+	http.Handle("/", router)
 
-	// http.HandleFunc("/", indexHandler)
-	// http.Handle(
-	// 	"/stuff/",
-	// 	http.StripPrefix("/stuff/", http.FileServer(http.Dir("./static"))),
-	// )
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		log.Printf("Defaulting to port %s", port)
+	}
 
-	// port := os.Getenv("PORT")
-	// if port == "" {
-	// 	port = "8080"
-	// 	log.Printf("Defaulting to port %s", port)
-	// }
-
-	// log.Printf("Listening on port %s", port)
-	// if err := http.ListenAndServe(":"+port, nil); err != nil {
-	// 	log.Fatal(err)
-	// }
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatal(err)
+	}
 }

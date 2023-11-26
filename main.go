@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/antonholmquist/jason"
 )
@@ -35,7 +36,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if uff != nil {
 		log.Fatal(uff)
 	}
+
 	fmt.Printf("type: %T, value:%f", temp, temp)
+	displayTemp := strconv.FormatFloat(temp, 'g', -1, 64)
+	fmt.Fprint(w, "\nThe temperature in London is: ", displayTemp, "C°")
 
 }
 

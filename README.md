@@ -38,4 +38,4 @@ Additional learning objectives:
 for local development set the ```%GOOGLE_SDK_PATH%``` environment variable and then call ```local-serve.bat```
 
 <br></br>
-for production deployment copy ```incomplete_app.yaml``` as ```app.yaml``` and set the missing values then run ```gcloud app deploy```
+for production deployment copy ```incomplete_app.yaml``` as ```app.yaml``` and set the missing values then run ```gcloud app deploy --quiet```

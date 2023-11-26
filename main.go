@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/antonholmquist/jason"
+	"github.com/gin-gonic/gin"
 )
 
 // indexHandler responds to requests with our greeting.
@@ -43,21 +44,34 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func asd(c *gin.Context) {
+	fmt.Println("asd has been called")
+}
+
+func dsa(c *gin.Context) {
+	fmt.Println("dsa has been called")
+}
+
 func main() {
-	http.HandleFunc("/", indexHandler)
-	http.Handle(
-		"/stuff/",
-		http.StripPrefix("/stuff/", http.FileServer(http.Dir("./static"))),
-	)
+	router := gin.New()
+	router.GET("/stuff", asd)
+	router.GET("/", dsa)
+	router.Run("localhost:8080")
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-		log.Printf("Defaulting to port %s", port)
-	}
+	// http.HandleFunc("/", indexHandler)
+	// http.Handle(
+	// 	"/stuff/",
+	// 	http.StripPrefix("/stuff/", http.FileServer(http.Dir("./static"))),
+	// )
 
-	log.Printf("Listening on port %s", port)
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
-		log.Fatal(err)
-	}
+	// port := os.Getenv("PORT")
+	// if port == "" {
+	// 	port = "8080"
+	// 	log.Printf("Defaulting to port %s", port)
+	// }
+
+	// log.Printf("Listening on port %s", port)
+	// if err := http.ListenAndServe(":"+port, nil); err != nil {
+	// 	log.Fatal(err)
+	// }
 }

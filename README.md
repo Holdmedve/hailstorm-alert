@@ -35,4 +35,4 @@ Additional learning objectives:
 for local development set the ```%GOOGLE_SDK_PATH%``` environment variable and then call ```local-serve.bat```
 
 <br></br>
-for production deployment set the ```WEATHER_API_KEY``` env var in the ```app.yaml```
+for production deployment set the ```WEATHER_API_KEY``` env var in the ```app.yaml``` then run ```gcloud app deploy```

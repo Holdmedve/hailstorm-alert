@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/antonholmquist/jason"
 )
 
 // indexHandler responds to requests with our greeting.
@@ -22,9 +23,20 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	resp, err := http.Get("http://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=London&aqi=no")
-	bodyBytes, err := io.ReadAll(resp.Body)
-	fmt.Fprint(w, string(bodyBytes))
-	fmt.Fprint(w, err)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+
+	v, err := jason.NewObjectFromReader(resp.Body)
+	fmt.Println(v.GetValue("current"))
+
+	temp, uff := v.GetFloat64("current", "temp_c")
+	if uff != nil {
+		log.Fatal(uff)
+	}
+	fmt.Printf("type: %T, value:%f", temp, temp)
+
 }
 
 func main() {

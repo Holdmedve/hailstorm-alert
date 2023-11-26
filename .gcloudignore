@@ -15,7 +15,13 @@
 
 node_modules
 
-index.yaml
-local-serve.bat
-go.mod
-README.md
+# Ignore everything by default
+*
+
+# Allow files explicitly
+!app.yaml
+!main.go
+!go.mod
+
+# Explicitly allow current dir. `gcloud deploy` fails without it.
+!.

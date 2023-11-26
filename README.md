@@ -26,3 +26,13 @@ Additional learning objectives:
 - [ ] think through logging
     - e.g. you can't log user data, so logging should be aligned to environment (prod, test)
 - [ ] use comments where code takes surprising turns
+- [ ] as an exercise, create a contract for the weather api that is used for tests and the real api
+    https://quii.gitbook.io/learn-go-with-tests/testing-fundamentals/working-without-mocks#the-problem-with-stubs-and-mocks
+- [ ] write your own code instead of using the ```jason``` package
+
+
+<br></br>
+for local development set the ```%GOOGLE_SDK_PATH%``` environment variable and then call ```local-serve.bat```
+
+<br></br>
+for production deployment set the ```WEATHER_API_KEY``` env var in the ```app.yaml```

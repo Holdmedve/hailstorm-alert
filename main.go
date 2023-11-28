@@ -41,11 +41,48 @@ func index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.tmpl", gin.H{"title": "Hello bello", "temp": displayTemp})
 }
 
+type City struct {
+	City string `form:"city"`
+}
+
+func temperature(c *gin.Context) {
+	var city City
+	err := c.ShouldBind(&city)
+	if err != nil {
+		c.String(400, "City does not exist")
+		return
+	}
+
+	apiKey, ok := os.LookupEnv("WEATHER_API_KEY")
+	if !ok {
+		fmt.Println("You forgot to set the api key in the env var")
+		return
+	}
+
+	resp, err := http.Get("http://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=" + city.City + "&aqi=no")
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+	defer resp.Body.Close()
+
+	v, err := jason.NewObjectFromReader(resp.Body)
+
+	temp, uff := v.GetFloat64("current", "temp_c")
+	if uff != nil {
+		log.Fatal(uff)
+	}
+
+	displayTemp := strconv.FormatFloat(temp, 'g', -1, 64)
+
+	c.String(200, displayTemp)
+}
+
 func main() {
 	router := gin.New()
 	router.LoadHTMLGlob("templates/*")
 
-	router.GET("/stuff", asd)
+	router.GET("/stuff", temperature)
 	router.GET("/", index)
 	http.Handle("/", router)
 

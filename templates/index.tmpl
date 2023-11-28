@@ -2,7 +2,7 @@
 	<h1>
 		{{ .title }}
 	</h1>
-    <p>
+    <p id=p1>
         The temperature in London is {{ .temp }} C°.
     </p>
 
@@ -17,7 +17,23 @@
 
 <script>
 function asd(val) {
-    console.log("select has been used");
-    console.log(val);
+    console.log(location.href);
+    console.log("select has been used with " + val);
+
+    const apiUrl = `${location.href}/stuff?city=${val}`;
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("resonse not ok");
+            }
+            return response.text();    
+        })
+        .then(data => {
+            const updatedText = `The temperature in ${val} is ${data} C°.`;
+            document.getElementById("p1").innerHTML = updatedText;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 </script>

@@ -5,7 +5,7 @@ Project iterations:
     - create deploy script for the application that is run locally
     - set api key in deploy script, but not as plain text
 - [ ] Add some user interaction
-    - [ ] User can select city from hardcoded list, temperature is displayed
+    - [x] User can select city from hardcoded list, temperature is displayed
     - [ ] List of cities is dynamic
 - [ ] create some visualisation
     - either map, or just text and images for weather types

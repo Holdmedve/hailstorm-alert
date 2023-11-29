@@ -3,19 +3,21 @@
 		{{ .title }}
 	</h1>
     <p id=p1>
-        The temperature in London is {{ .temp }} C°.
+        The temperature in some african city is high.
     </p>
 
     <label for="cities">Choose a city:</label>
 
     <select name="cities" id="cities" onchange="asd(this.value)">
+        <option value="Salzburg">Salzburg</option>
         <option value="London">London</option>
         <option value="Budapest">Budapest</option>
-        <option value="Salzburg">Salzburg</option>
     </select>
 </html>
 
 <script>
+window.addEventListener("load", asd("Salzburg"));
+
 function asd(val) {
     console.log(location.href);
     console.log("select has been used with " + val);

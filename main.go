@@ -16,29 +16,7 @@ func asd(c *gin.Context) {
 }
 
 func index(c *gin.Context) {
-	apiKey, ok := os.LookupEnv("WEATHER_API_KEY")
-	if !ok {
-		fmt.Println("You forgot to set the api key in the env var")
-		return
-	}
-
-	resp, err := http.Get("http://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=London&aqi=no")
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-	defer resp.Body.Close()
-
-	v, err := jason.NewObjectFromReader(resp.Body)
-
-	temp, uff := v.GetFloat64("current", "temp_c")
-	if uff != nil {
-		log.Fatal(uff)
-	}
-
-	displayTemp := strconv.FormatFloat(temp, 'g', -1, 64)
-
-	c.HTML(http.StatusOK, "index.tmpl", gin.H{"title": "Hello bello", "temp": displayTemp})
+	c.HTML(http.StatusOK, "index.tmpl", gin.H{"title": "Hello bello"})
 }
 
 type City struct {

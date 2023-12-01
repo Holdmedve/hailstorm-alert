@@ -6,8 +6,10 @@ Project iterations:
     - set api key in deploy script, but not as plain text
 - [ ] Add some user interaction
     - [x] User can select city from hardcoded list, temperature is displayed
-    - [ ] List of cities is dynamic
+    - [x] List of cities is dynamic
     - [ ] Don't search city on every change, have some cooldown -> fewer api calls
+    - [ ] No duplicates in suggestions
+    - [ ] Add country as well
 - [ ] create some visualisation
     - either map, or just text and images for weather types
     - use angular for the frontend

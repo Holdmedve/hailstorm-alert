@@ -23,6 +23,7 @@ node_modules
 !main.go
 !go.mod
 !templates
+!js
 
 # Explicitly allow current dir. `gcloud deploy` fails without it.
 !.

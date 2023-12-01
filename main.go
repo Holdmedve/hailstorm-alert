@@ -115,6 +115,7 @@ func temperature(c *gin.Context) {
 func main() {
 	router := gin.New()
 	router.LoadHTMLGlob("templates/*")
+	router.Static("/js", "./js")
 
 	router.GET("/stuff", temperature)
 	router.GET("/", index)

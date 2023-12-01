@@ -15,7 +15,9 @@
     </select>
 
     <br></br>
-    <input type="search" id="city-search" name="city-search" oninput="searchCity(this.value)">
+    <input type="search" id="city-search" oninput="searchCity(this.value)" list="city-suggestions">
+    <datalist id="city-suggestions">
+    </datalist>
 </html>
 
 <script>
@@ -36,8 +38,11 @@ function searchCity(city) {
                 console.log("it is empty");
             } else {
                 const cities = JSON.parse(data).cities;
+                let citySuggestions = document.getElementById("city-suggestions");
                 for (const city of cities) {
-                    console.log(city);
+                    let newOpt = document.createElement('option');
+                    newOpt.value = city;
+                    citySuggestions.appendChild(newOpt);
                 }
             }
         })

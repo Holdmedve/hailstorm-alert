@@ -8,30 +8,55 @@
 
     <label for="cities">Choose a city:</label>
 
-    <select name="cities" id="cities" onchange="asd(this.value)">
+    <select name="cities" id="cities" onchange="displayTemperatureForCity(this.value)">
         <option value="Salzburg">Salzburg</option>
         <option value="London">London</option>
         <option value="Budapest">Budapest</option>
     </select>
+
+    <br></br>
+    <input type="search" id="city-search" name="city-search" oninput="searchCity(this.value)">
 </html>
 
 <script>
-window.addEventListener("load", asd("Salzburg"));
+window.addEventListener("load", displayTemperatureForCity("Salzburg"));
 
-function asd(val) {
-    console.log(location.href);
-    console.log("select has been used with " + val);
-
-    const apiUrl = `${location.href}/stuff?city=${val}`;
+function searchCity(city) {
+    console.log(`search has been changed to ${city}`)
+    const apiUrl = `${location.href}/city/search?query=${city}`;
     fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
-                throw new Error("resonse not ok");
+                throw new Error("response not ok");
             }
             return response.text();    
         })
         .then(data => {
-            const updatedText = `The temperature in ${val} is ${data} C°.`;
+            if(data === ""){
+                console.log("it is empty");
+            } else {
+                const cities = JSON.parse(data).cities;
+                for (const city of cities) {
+                    console.log(city);
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function displayTemperatureForCity(city) {
+    const apiUrl = `${location.href}/stuff?city=${city}`;
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("response not ok");
+            }
+            return response.text();    
+        })
+        .then(temperature => {
+            const updatedText = `The temperature in ${city} is ${temperature} C°.`;
             document.getElementById("p1").innerHTML = updatedText;
         })
         .catch(error => {

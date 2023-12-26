@@ -13,19 +13,21 @@ namespace ReactDemo.Controllers
         static WeatherDashboardController()
         {}
 
-        private static async Task<IList<CityModel>> searchCity()
+        private static async Task<IList<CityModel>> searchCity(string query)
         {
             string apiKey = getWeatherApiKey();
-            if (apiKey == null)
+            if (apiKey == null || query == null)
             {
                 return new List<CityModel>();
             }
 
-            string searchUri = $"http://api.weatherapi.com/v1/search.json?key={apiKey}&q=Lon";
+            Console.WriteLine("AAAA");
+            string searchUri = $"http://api.weatherapi.com/v1/search.json?key={apiKey}&q={query}";
+            Console.WriteLine("BBBBB");
             HttpClient client = new HttpClient();
             using HttpResponseMessage response = await client.GetAsync(searchUri);
             string content = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(content);
+            // Console.WriteLine(content);
 
             List<CityModel> cities = JsonSerializer.Deserialize<List<CityModel>>(
                 content, 
@@ -35,10 +37,11 @@ namespace ReactDemo.Controllers
                 }                
             );
 
-            foreach(CityModel city in cities)
-            {
-                Console.WriteLine(city.ToString());
-            }
+
+            // foreach(CityModel city in cities)
+            // {
+            //     Console.WriteLine(city.ToString());
+            // }
 
             return cities;
         }
@@ -48,15 +51,16 @@ namespace ReactDemo.Controllers
         public  async Task<ActionResult> Index()
         {
             Console.WriteLine("this has been called");
-            return View(await searchCity());
+            return View(await searchCity("Lon"));
         }
 
-        // [Route("cities")]
-        // public ActionResult Cities()
-        // {
-
-        //     return Json(_cities);
-        // }
+        [Route("city-search")]
+        [HttpGet]
+        public async Task<ActionResult> CitySearch(string query)
+        {
+            Console.WriteLine("city search has been called");
+            return Ok(await searchCity(query));
+        }
 
         private static string getWeatherApiKey()
         {

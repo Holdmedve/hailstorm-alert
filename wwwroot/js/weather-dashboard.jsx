@@ -17,9 +17,9 @@ class CityComponent extends React.Component
 class CityList extends React.Component
 {
     render() {
-        var cityNodes = this.props.data.map(function(city) {
+        const cityNodes = this.props.data.map(function(city, i) {
             return (
-                <City country={city.country} zipcode={city.zipcode} key={city.id}>
+                <City country={city.country} zipcode={city.zipcode} key={i}>
                     {city.name}
                 </City>
             );
@@ -29,7 +29,7 @@ class CityList extends React.Component
 }
 
 function createRemarkable() {
-	var remarkable =
+	const remarkable =
 		'undefined' != typeof global && global.Remarkable
 			? global.Remarkable
 			: window.Remarkable;
@@ -39,8 +39,8 @@ function createRemarkable() {
 
 class City extends React.Component {
 	rawMarkup = () => {
-		var md = createRemarkable();
-		var rawMarkup = md.render(this.props.children.toString());
+		const md = createRemarkable();
+		const rawMarkup = md.render(this.props.children.toString());
 		return { __html: rawMarkup };
 	};
 

@@ -13,10 +13,14 @@ namespace ReactDemo.Controllers
         {
             _cities = new List<CityModel>{
                 new CityModel{
-                    Id= "n13kl5n1kl5",
                     Name = "Salzburg",
                     Country = "Austria",
                     Zipcode = "5020"
+                },
+                new CityModel{
+                    Name = "Vienna",
+                    Country = "Austria",
+                    Zipcode = "1000"
                 }
             };
         }

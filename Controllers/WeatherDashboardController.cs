@@ -1,43 +1,66 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReactDemo.Models;
+using System.Text.Json;
 
 namespace ReactDemo.Controllers
 {
     public class WeatherDashboardController : Controller
     {
-        private static readonly IList<CityModel> _cities;
-
         static WeatherDashboardController()
+        {}
+
+        private static async Task<IList<CityModel>> searchCity()
         {
-            _cities = new List<CityModel>{
-                new CityModel{
-                    Name = "Salzburg",
-                    Country = "Austria",
-                    Zipcode = "5020"
-                },
-                new CityModel{
-                    Name = "Vienna",
-                    Country = "Austria",
-                    Zipcode = "1000"
-                }
-            };
+            string apiKey = getWeatherApiKey();
+            if (apiKey == null)
+            {
+                return new List<CityModel>();
+            }
+
+            string searchUri = $"http://api.weatherapi.com/v1/search.json?key={apiKey}&q=Lon";
+            HttpClient client = new HttpClient();
+            using HttpResponseMessage response = await client.GetAsync(searchUri);
+            string content = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(content);
+
+            List<CityModel> cities = JsonSerializer.Deserialize<List<CityModel>>(
+                content, 
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }                
+            );
+
+            foreach(CityModel city in cities)
+            {
+                Console.WriteLine(city.ToString());
+            }
+
+            return cities;
         }
 
         [Route("weather-dashboard")]
         [HttpGet]
-        public ActionResult Index()
+        public  async Task<ActionResult> Index()
         {
             Console.WriteLine("this has been called");
-            return View(_cities);
+            return View(await searchCity());
         }
 
-        [Route("cities")]
-        public ActionResult Cities()
-        {
+        // [Route("cities")]
+        // public ActionResult Cities()
+        // {
 
-            return Json(_cities);
+        //     return Json(_cities);
+        // }
+
+        private static string getWeatherApiKey()
+        {
+            return Environment.GetEnvironmentVariable("WEATHER_API_KEY");
         }
     }
 

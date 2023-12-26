@@ -19,7 +19,7 @@ class CityList extends React.Component
     render() {
         const cityNodes = this.props.data.map(function(city, i) {
             return (
-                <City country={city.country} zipcode={city.zipcode} key={i}>
+                <City country={city.country} key={city.id}>
                     {city.name}
                 </City>
             );
@@ -48,7 +48,6 @@ class City extends React.Component {
 		return (
 			<div className="city">
 				<h2 className="cityCountry">{this.props.country}</h2>
-				<h3 className="cityZipcode">{this.props.zipcode}</h3>
 				<span dangerouslySetInnerHTML={this.rawMarkup()} />
 			</div>
 		);

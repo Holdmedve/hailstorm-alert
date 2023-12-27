@@ -5,10 +5,22 @@ class CityComponent extends React.Component
         url: this.props.url
     };
 
+    handleInputChange = e => {
+        fetch(this.props.url + '?' + new URLSearchParams({
+            query: e.target.value
+        }))
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); 
+                this.setState({ data: data });    
+            })
+            
+    };
+
     render() {
         return (
             <div className="cityComponent">
-                <CitySearch url={this.state.url} />
+                <CitySearch url={this.state.url} onInputChange={this.handleInputChange} />
                 <CityList data={this.state.data} />
             </div>
         );
@@ -17,16 +29,8 @@ class CityComponent extends React.Component
 
 class CitySearch extends React.Component
 {
-    handleInputChange = e => {
-        fetch(this.props.url + '?' + new URLSearchParams({
-            query: e.target.value
-        }))
-            .then(response => response.json())
-            .then(data => console.log(data));
-    };
-
     render() {
-        return <input type="search" id="citySearch" onChange={this.handleInputChange}/>
+        return <input type="search" id="citySearch" onChange={this.props.onInputChange}/>
     }
 }
 

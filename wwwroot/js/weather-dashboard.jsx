@@ -1,51 +1,56 @@
-class CityComponent extends React.Component
-{
-    state = { 
-        data: this.props.initialData,
-        url: this.props.url
-    };
+const WeatherDashboard = (props) => {
+    const [timer, setTimer] = React.useState(null);
+    const [url, setUrl] = React.useState(props.url);
+    const [data, setData] = React.useState(props.initialData);
 
-    handleInputChange = e => {
-        fetch(this.props.url + '?' + new URLSearchParams({
-            query: e.target.value
+    queryCities = query => {
+        console.log("queryCities was called");
+        console.log(query);
+        fetch(url + '?' + new URLSearchParams({
+            query: query
         }))
             .then(response => response.json())
             .then(data => {
                 console.log(data); 
-                this.setState({ data: data });    
+                setData(data);    
             })
-            
-    };
+    }
 
-    render() {
+    handleInputChange = event => {
+        console.log("handleInputChange was called");
+        const input = event.currentTarget.value;
+
+        clearTimeout(timer);
+        setTimer(
+            setTimeout(() => {
+                console.log("asd");
+                queryCities(input);
+                }, 1000
+            )
+        );  
+    }
+
+    return (
+        <div className="cityComponent">
+            <CitySearch onInputChange={handleInputChange} />
+            <CityList data={data} />
+        </div>
+    );
+}
+
+const CitySearch = (props) => {
+    return <input type="search" id="citySearch" onChange={props.onInputChange}/>
+}
+
+const CityList = (props) => {
+    const cityNodes = props.data.map(function(city) {
         return (
-            <div className="cityComponent">
-                <CitySearch url={this.state.url} onInputChange={this.handleInputChange} />
-                <CityList data={this.state.data} />
-            </div>
+            <City country={city.country} key={city.id}>
+                {city.name}
+            </City>
         );
-    }
-}
-
-class CitySearch extends React.Component
-{
-    render() {
-        return <input type="search" id="citySearch" onChange={this.props.onInputChange}/>
-    }
-}
-
-class CityList extends React.Component
-{
-    render() {
-        const cityNodes = this.props.data.map(function(city) {
-            return (
-                <City country={city.country} key={city.id}>
-                    {city.name}
-                </City>
-            );
-        });
-        return <div className="cityList">{cityNodes}</div>;
-    }
+    });
+    return <div className="cityList">{cityNodes}</div>;
 }
 
 function createRemarkable() {
@@ -57,19 +62,17 @@ function createRemarkable() {
 	return new remarkable();
 }
 
-class City extends React.Component {
+const City = (props) => {
 	rawMarkup = () => {
 		const md = createRemarkable();
-		const rawMarkup = md.render(this.props.children.toString());
+		const rawMarkup = md.render(props.children.toString());
 		return { __html: rawMarkup };
 	};
 
-	render() {
-		return (
-			<div className="city">
-				<h2 className="cityCountry">{this.props.country}</h2>
-				<span dangerouslySetInnerHTML={this.rawMarkup()} />
-			</div>
-		);
-	}
+    return (
+        <div className="city">
+            <h2 className="cityCountry">{props.country}</h2>
+            <span dangerouslySetInnerHTML={rawMarkup()} />
+        </div>
+    );
 }

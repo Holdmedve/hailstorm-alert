@@ -16,7 +16,7 @@ namespace ReactDemo.Controllers
         private static async Task<IList<CityModel>> searchCity(string query)
         {
             string apiKey = getWeatherApiKey();
-            if (apiKey == null || query == null)
+            if (apiKey == null || query == null || query == "")
             {
                 return new List<CityModel>();
             }
@@ -51,7 +51,7 @@ namespace ReactDemo.Controllers
         public  async Task<ActionResult> Index()
         {
             Console.WriteLine("this has been called");
-            return View(await searchCity("Lon"));
+            return View(await searchCity(""));
         }
 
         [Route("city-search")]

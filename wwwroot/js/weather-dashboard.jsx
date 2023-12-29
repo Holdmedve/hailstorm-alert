@@ -25,32 +25,32 @@ const WeatherDashboard = (props) => {
             setTimeout(() => {
                 console.log("asd");
                 queryCities(input);
-                }, 1000
+                }, 500
             )
         );  
     }
 
     return (
         <div className="cityComponent">
-            <CitySearch onInputChange={handleInputChange} />
-            <CityList data={data} />
+            <CitySearch listId="city-list" onInputChange={handleInputChange} />
+            <CityList id="city-list" data={data} />
         </div>
     );
 }
 
 const CitySearch = (props) => {
-    return <input type="search" id="citySearch" onChange={props.onInputChange}/>
+    return <input list={props.listId} type="search" id="citySearch" onChange={props.onInputChange}/>
 }
 
 const CityList = (props) => {
     const cityNodes = props.data.map(function(city) {
         return (
-            <City country={city.country} key={city.id}>
+            <City country={city.country} key={city.id} city={city.name}>
                 {city.name}
             </City>
         );
     });
-    return <div className="cityList">{cityNodes}</div>;
+    return <datalist id={props.id}>{cityNodes}</datalist>;
 }
 
 function createRemarkable() {
@@ -69,10 +69,8 @@ const City = (props) => {
 		return { __html: rawMarkup };
 	};
 
+    const val = `${props.city}, ${props.country}`;
     return (
-        <div className="city">
-            <h2 className="cityCountry">{props.country}</h2>
-            <span dangerouslySetInnerHTML={rawMarkup()} />
-        </div>
+        <option value={val}>{val}</option>
     );
 }

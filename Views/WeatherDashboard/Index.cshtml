@@ -1,4 +1,4 @@
-@model IEnumerable<ReactDemo.Models.CityModel>
+@model ReactDemo.Models.BagModel
 @{
 	Layout = null;
 }
@@ -10,7 +10,7 @@
         </p>
         @Html.React("WeatherDashboard", new
         {
-            initialData = Model,
+            initialData = Model.Cities,
             url = Url.Action("CitySearch"),
         })
         <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>

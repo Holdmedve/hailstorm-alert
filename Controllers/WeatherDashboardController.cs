@@ -13,21 +13,18 @@ namespace ReactDemo.Controllers
         static WeatherDashboardController()
         {}
 
-        private static async Task<IList<CityModel>> searchCity(string query)
+        private static async Task<BagModel> searchCity(string query)
         {
             string apiKey = getWeatherApiKey();
             if (apiKey == null || query == null || query == "")
             {
-                return new List<CityModel>();
+                return new BagModel{Cities = new List<CityModel>()};
             }
 
-            Console.WriteLine("AAAA");
             string searchUri = $"http://api.weatherapi.com/v1/search.json?key={apiKey}&q={query}";
-            Console.WriteLine("BBBBB");
             HttpClient client = new HttpClient();
             using HttpResponseMessage response = await client.GetAsync(searchUri);
             string content = await response.Content.ReadAsStringAsync();
-            // Console.WriteLine(content);
 
             List<CityModel> cities = JsonSerializer.Deserialize<List<CityModel>>(
                 content, 
@@ -37,20 +34,14 @@ namespace ReactDemo.Controllers
                 }                
             );
 
-
-            // foreach(CityModel city in cities)
-            // {
-            //     Console.WriteLine(city.ToString());
-            // }
-
-            return cities;
+            BagModel bag = new BagModel{Cities = cities};
+            return bag;
         }
 
         [Route("weather-dashboard")]
         [HttpGet]
         public  async Task<ActionResult> Index()
         {
-            Console.WriteLine("this has been called");
             return View(await searchCity(""));
         }
 
@@ -58,8 +49,7 @@ namespace ReactDemo.Controllers
         [HttpGet]
         public async Task<ActionResult> CitySearch(string query)
         {
-            Console.WriteLine("city search has been called");
-            return Ok(await searchCity(query));
+            return Json(await searchCity(query));
         }
 
         private static string getWeatherApiKey()

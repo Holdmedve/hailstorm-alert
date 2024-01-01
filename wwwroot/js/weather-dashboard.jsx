@@ -4,26 +4,26 @@ const WeatherDashboard = (props) => {
     const [data, setData] = React.useState(props.initialData);
 
     queryCities = query => {
-        console.log("queryCities was called");
         console.log(query);
+        if (query === ""){
+            console.log("blablabla");
+            return;
+        }
+
         fetch(url + '?' + new URLSearchParams({
             query: query
         }))
             .then(response => response.json())
-            .then(data => {
-                console.log(data); 
-                setData(data);    
+            .then(respData => {
+                setData(respData.cities);    
             })
     }
 
     handleInputChange = event => {
-        console.log("handleInputChange was called");
         const input = event.currentTarget.value;
-
         clearTimeout(timer);
         setTimer(
             setTimeout(() => {
-                console.log("asd");
                 queryCities(input);
                 }, 500
             )

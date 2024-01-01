@@ -1,7 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace ReactDemo.Models
 {
+    public class BagModel
+    {
+        public List<CityModel> Cities { get; set; }
+    }
 
     public class CityModel
     {

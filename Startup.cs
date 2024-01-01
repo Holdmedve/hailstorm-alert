@@ -64,7 +64,6 @@ namespace ReactDemo
 				// your components as well as all of their dependencies.
 				// See http://reactjs.net/ for more information. Example:
 				config
-				  .AddScript("~/js/remarkable.min.js")
 				  .AddScript("~/js/*.jsx")
 				  .SetJsonSerializerSettings(new JsonSerializerSettings
 					{

@@ -53,22 +53,7 @@ const CityList = (props) => {
     return <datalist id={props.id}>{cityNodes}</datalist>;
 }
 
-function createRemarkable() {
-	const remarkable =
-		'undefined' != typeof global && global.Remarkable
-			? global.Remarkable
-			: window.Remarkable;
-
-	return new remarkable();
-}
-
 const City = (props) => {
-	rawMarkup = () => {
-		const md = createRemarkable();
-		const rawMarkup = md.render(props.children.toString());
-		return { __html: rawMarkup };
-	};
-
     const val = `${props.city}, ${props.country}`;
     return (
         <option value={val}>{val}</option>

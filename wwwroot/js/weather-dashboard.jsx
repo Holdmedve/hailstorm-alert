@@ -3,6 +3,8 @@ const WeatherDashboard = (props) => {
     const [url, setUrl] = React.useState(props.url);
     const [data, setData] = React.useState(props.initialData);
 
+    const citySearchId = "citySearch";
+
     queryCities = query => {
         if (query === ""){
             return;
@@ -32,13 +34,13 @@ const WeatherDashboard = (props) => {
     }
 
     handleOptionSelect = event => {
-        console.log("asd");
-        console.log('event:');
-        const myEvent = event;
-        console.log(myEvent);
-        console.log(myEvent.value);
-        console.log(myEvent.target);
-        console.log(myEvent.target.text);
+        const cityId = event.target.getAttribute("data-city-id");
+        const cityDisplayText = event.target.text;
+        let searchElement = document.getElementById(citySearchId);
+        searchElement.value = cityDisplayText;
+        setData([]);
+        
+        // send GET request to backend for city to get alert data
     }
 
 
@@ -46,6 +48,7 @@ const WeatherDashboard = (props) => {
         <div className="cityComponent">
             <CitySearch 
                 onInputChange={handleInputChange} 
+                id={citySearchId}
             />
             <CitySuggestionList 
                 id="city-list" 
@@ -59,27 +62,30 @@ const WeatherDashboard = (props) => {
 const CitySearch = (props) => {
     return <input 
         type="text" 
-        id="citySearch"
-        // list="city-list" 
+        id={props.id}
         onChange={props.onInputChange}
     />
 }
 
 const CitySuggestionList = (props) => {
     const cityNodes = props.data.map(function(city) {
-        console.log(`id is: ${city.id}`);
         const val = `${city.name}, ${city.country}`;
         return (
-            <CitySuggestion key={city.id} value={val} onClick={props.onOptionSelect}></CitySuggestion>
+            <CitySuggestion key={city.id} cityId={city.id} value={val} onClick={props.onOptionSelect}>
+            </CitySuggestion>
         )
         
     });
-    // return <datalist key={props.id}>{cityNodes}</datalist>;
     return <ul id="myUl">{ cityNodes }</ul>
 }
 
 const CitySuggestion = (props) => {
+
     return (
-        <li onClick={props.onClick}><a href={`#${props.value}`} >{props.value}</a></li>
+        <li onClick={props.onClick}>
+            <a data-city-id={props.cityId} href={`#${props.value}`} >
+                {props.value}
+            </a>
+        </li>
     );
 }

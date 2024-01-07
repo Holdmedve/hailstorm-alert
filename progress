@@ -1,0 +1,46 @@
+tasks, and estimations
+
+estimated sum: 17 days 
+optional:      9 days   
+
+to-do:
+- [0.5d] e2e weather alert data
+  deserialize weather alert data from weather api to c# model
+  fire request to city weather endpoint from front end
+  catch weather alert response, set to js variable, console.log
+- [0.5d] visualize weather alert response for user (can be ugly)
+
+- [1d] setup entity framework, install, import
+  create sqlite helloworld transaction
+  automation to create empty tables
+- [1d] make content city selection content visible only to logged in users
+
+- [2d] for each data model (there are ~5 models)
+  create EF model
+  create endpoints that handle db transactions
+- [2d] user login, registration, forgotten password
+  ui elements, tokens, backend endpoints, models, database, email send
+- [2d] user city selection
+  gui, endpoints, models, database
+- [2d] user alert notification
+  endpoint, db, emails, weatherapi, logic for 'who needs what alert'
+- [2d] make ui nice
+  have something more than just plain html
+  figure out if you need additional dependecy for this and how to include it if yes
+  colors, placement, flexing, font
+
+- [4d] host application somewhere, create recurring jobs
+  decide on services, port application, resolve dependency issues, handle secrets
+  create scheduler, create db and tables, resolve connection to db
+
+OPTIONAL
+- [2d] prepare for automated tests
+  setup, dependencies, how to start tests
+  for front end as well
+- [4d] write automated tests
+  write tests, refactor code
+- [2d] create contract test, for weather api
+- [1d] update language runtime versions
+  resolve upgrade issues
+
+done:

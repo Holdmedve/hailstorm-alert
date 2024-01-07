@@ -4,10 +4,6 @@ estimated sum: 17 days
 optional:      9 days   
 
 to-do:
-- [0.5d] e2e weather alert data
-  deserialize weather alert data from weather api to c# model
-  fire request to city weather endpoint from front end
-  catch weather alert response, set to js variable, console.log
 - [0.5d] visualize weather alert response for user (can be ugly)
 
 - [1d] setup entity framework, install, import
@@ -44,3 +40,7 @@ OPTIONAL
   resolve upgrade issues
 
 done:
+- [0.5d] e2e weather alert data
+  deserialize weather alert data from weather api to c# model
+  fire request to city weather endpoint from front end
+  catch weather alert response, set to js variable, console.log

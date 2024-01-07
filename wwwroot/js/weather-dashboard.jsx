@@ -2,6 +2,8 @@ const WeatherDashboard = (props) => {
     const [timer, setTimer] = React.useState(null);
     const [url, setUrl] = React.useState(props.url);
     const [data, setData] = React.useState(props.initialData);
+    const [cityWeatherUrl, setCityWeatherUrl] = React.useState(props.cityWeatherUrl);
+    const [cityWeatherData, setCityWeatherData] = React.useState(props.initialWeatherData);
 
     const citySearchId = "citySearch";
 
@@ -40,7 +42,16 @@ const WeatherDashboard = (props) => {
         searchElement.value = cityDisplayText;
         setData([]);
         
-        // send GET request to backend for city to get alert data
+        fetch(cityWeatherUrl + '?' + new URLSearchParams({
+            cityId: cityId
+        }))
+            .then(response => response.json())
+            .then(respJson => {
+                console.log('weather result');
+                console.log(respJson);
+                console.log(respJson.cityWeather);
+                setCityWeatherData(respJson.cityWeather);    
+            });
     }
 
 

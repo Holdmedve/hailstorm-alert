@@ -51,6 +51,7 @@ function WeatherDashboard() {
 
     const onSuggestionClicked = (cityId) => {
         console.log(`onSuggestionClicked cityId: ${ cityId }`);
+        setSuggestions([]);
         cityWeather(cityId);
     }
 
@@ -58,8 +59,8 @@ function WeatherDashboard() {
         <div className="WeatherDashboard">
             <input
                 type="text" 
-                className="search-bar"
-                id="city-search-bar"
+                className="searchbar"
+                id="city-searchbar"
                 placeholder="City..."
                 onChange={onChange}
             />
@@ -67,7 +68,7 @@ function WeatherDashboard() {
                 {suggestions.map((suggestion) => {
                     const cityId = suggestion.id;
                     return (
-                        <div onClick={() => onSuggestionClicked(cityId)}>
+                        <div className="suggestion" onClick={() => onSuggestionClicked(cityId)}>
                             {suggestion.name}, {suggestion.country}
                         </div>
                     )

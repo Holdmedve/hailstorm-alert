@@ -55,14 +55,20 @@ function WeatherDashboard() {
         cityWeather(cityId);
     }
 
+    const handleBlur = () => {
+        console.log('handle blur');
+        setSuggestions([]);
+    }
+
     return (
-        <div className="WeatherDashboard">
+        <div tabIndex={0} className="WeatherDashboard">
             <input
                 type="text" 
                 className="searchbar"
                 id="city-searchbar"
                 placeholder="City..."
                 onChange={onChange}
+                onBlur={handleBlur}
             />
             <div>
                 {suggestions.map((suggestion) => {

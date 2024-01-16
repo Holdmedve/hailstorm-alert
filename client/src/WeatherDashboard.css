@@ -1,12 +1,3 @@
 .WeatherDashboard {
     text-align: center;
 }
-
-.suggestion {
-    border: 1px solid white;
-    padding: 1px 10px;
-}
-
-.suggestion:hover {
-    border: 1px solid #030202;
-}

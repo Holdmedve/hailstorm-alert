@@ -2,9 +2,10 @@ import { useState } from "react";
 import './CitySearch.css';
 
 
-function CitySearch() {
+function CitySearch(props) {
     const [timer, setTimer] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
+    const [cityData, setCityData] = useState({});
     const [suggestions, setSuggestions] = useState([]);
 
     const url = "http://localhost:5146";
@@ -25,7 +26,7 @@ function CitySearch() {
             });
     }
 
-    const cityWeather = (cityId) => {
+    const cityWeather = (cityId, name, country) => {
         console.log(`cityWeather called with cityId: ${ cityId }`);
         const numDays = 3;
         fetch(url + '/city-weather/' + cityId + '/' + numDays)
@@ -33,6 +34,9 @@ function CitySearch() {
             .then(data => {
                 console.log('city weather result');
                 console.log(data);
+                setCityData({'cityId': cityId, 'name': name, 'country': country});
+                console.log(cityData);
+                props.onCityData(cityData);
                 // setSuggestions(data)
             });
     }
@@ -49,10 +53,10 @@ function CitySearch() {
         ); 
     }
 
-    const onSuggestionClicked = (cityId) => {
+    const onSuggestionClicked = (cityId, name, country) => {
         console.log(`onSuggestionClicked cityId: ${ cityId }`);
         setSuggestions([]);
-        cityWeather(cityId);
+        cityWeather(cityId, name, country);
     }
 
     const handleBlur = () => {
@@ -75,12 +79,13 @@ function CitySearch() {
             />
             <div>
                 {suggestions.map((suggestion) => {
-                    const cityId = suggestion.id;
                     return (
                         <div 
-                            key={cityId} 
+                            key={suggestion.id} 
                             className="suggestion" 
-                            onClick={() => onSuggestionClicked(cityId)}
+                            onClick={() => onSuggestionClicked(
+                                suggestion.id, suggestion.name, suggestion.country
+                            )}
                         >
                             {suggestion.name}, {suggestion.country}
                         </div>

@@ -4,13 +4,13 @@ import './CitySearch.css';
 
 function CitySearch(props) {
     const [timer, setTimer] = useState(null);
-    const [cityData, setCityData] = useState({});
     const [suggestions, setSuggestions] = useState([]);
 
     const url = "http://localhost:5146"; // TODO: pass this as props
 
-    const queryCities = query => {
+    const searchCity = query => {
         if (query === "") {
+            console.log('searchCity empty query');
             setSuggestions([]);
             return;
         }
@@ -25,36 +25,34 @@ function CitySearch(props) {
             });
     }
 
-    const cityWeather = (cityId, name, country) => {
-        console.log(`cityWeather called with cityId: ${ cityId }`);
+    const fetchCityWeather = (cityId, name, country) => {
+        console.log(`fetchCityWeather called with cityId: ${ cityId }`);
         const numDays = 3;
         fetch(url + '/city-weather/' + cityId + '/' + numDays)
             .then(response => response.json())
             .then(data => {
                 console.log('city weather result');
                 console.log(data);
-                setCityData({'cityId': cityId, 'name': name, 'country': country});
-                console.log(cityData);
-                props.onCityData(cityData);
+                props.onCityData({'name': name, 'country': country});
             });
     }
 
     const handleInput = (e) => {
         const value = e.target.value;
-        console.log(`onChange called: ${ value }`);
+        console.log(`handleInput called: ${ value }`);
         clearTimeout(timer);
         setTimer(
             setTimeout(() => {
-                queryCities(value);
+                searchCity(value);
                 }, 250
             )
         ); 
     }
 
-    const onSuggestionClicked = (cityId, name, country) => {
-        console.log(`onSuggestionClicked cityId: ${ cityId }`);
+    const handleSuggestionClicked = (cityId, name, country) => {
+        console.log(`handleSuggestionClicked cityId: ${ cityId }`);
         setSuggestions([]);
-        cityWeather(cityId, name, country);
+        fetchCityWeather(cityId, name, country);
     }
 
     const handleBlur = () => {
@@ -81,7 +79,7 @@ function CitySearch(props) {
                         <div 
                             key={suggestion.id} 
                             className="suggestion" 
-                            onClick={() => onSuggestionClicked(
+                            onClick={() => handleSuggestionClicked(
                                 suggestion.id, suggestion.name, suggestion.country
                             )}
                         >

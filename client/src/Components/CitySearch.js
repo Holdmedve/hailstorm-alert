@@ -4,11 +4,10 @@ import './CitySearch.css';
 
 function CitySearch(props) {
     const [timer, setTimer] = useState(null);
-    const [searchQuery, setSearchQuery] = useState("");
     const [cityData, setCityData] = useState({});
     const [suggestions, setSuggestions] = useState([]);
 
-    const url = "http://localhost:5146";
+    const url = "http://localhost:5146"; // TODO: pass this as props
 
     const queryCities = query => {
         if (query === "") {
@@ -37,7 +36,6 @@ function CitySearch(props) {
                 setCityData({'cityId': cityId, 'name': name, 'country': country});
                 console.log(cityData);
                 props.onCityData(cityData);
-                // setSuggestions(data)
             });
     }
 

@@ -1,0 +1,1 @@
+gcloud run deploy --set-env-vars=WEATHER_API_KEY=%WEATHER_API_KEY% --source . 

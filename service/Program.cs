@@ -20,7 +20,9 @@ class Program {
         app.MapGet("/city-search/{query}", Handlers.CitySearch);
         app.MapGet("/city-weather/{cityId}/{numDays}", Handlers.CityWeather);
 
-        app.Run();
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+        var url = $"http://0.0.0.0:{port}";
+        app.Run(url);
     }
 } 
 

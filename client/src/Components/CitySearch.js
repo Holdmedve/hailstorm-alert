@@ -1,12 +1,11 @@
 import { useState } from "react";
 import './CitySearch.css';
+import { baseUrl } from '../weatherApi'
 
 
 function CitySearch(props) {
     const [timer, setTimer] = useState(null);
     const [suggestions, setSuggestions] = useState([]);
-
-    const url = "http://localhost:5146"; // TODO: pass this as props
 
     const searchCity = query => {
         if (query === "") {
@@ -16,7 +15,7 @@ function CitySearch(props) {
         }
 
         console.log(`queryCities called: ${ query }`);
-        fetch(url + '/city-search/' + query)
+        fetch(baseUrl() + '/city-search/' + query)
             .then(response => response.json())
             .then(data => {
                 console.log('search result');
@@ -28,7 +27,7 @@ function CitySearch(props) {
     const fetchCityWeather = (cityId, name, country) => {
         console.log(`fetchCityWeather called with cityId: ${ cityId }`);
         const numDays = 3;
-        fetch(url + '/city-weather/' + cityId + '/' + numDays)
+        fetch(baseUrl() + '/city-weather/' + cityId + '/' + numDays)
             .then(response => response.json())
             .then(data => {
                 console.log('city weather result');

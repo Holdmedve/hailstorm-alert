@@ -4,7 +4,6 @@ import './App.css';
 function App() {
   const getItems = () => {
     fetch("http://localhost:5169/todoitems")
-    // fetch("https://google.com")
       .then((response) => { 
         return response.json();
       })

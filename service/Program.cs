@@ -8,7 +8,12 @@ class Program {
         builder.Services.AddCors( options => {
             options.AddDefaultPolicy(builder => {
                 builder.SetIsOriginAllowed(origin => {
-                    return new Uri(origin).Host == "localhost";
+                    string host = new Uri(origin).Host;
+                    if (host == "localhost" ||
+                        host == "weather-alert-404915.oa.r.appspot.com"
+                    )
+                        return true;                    
+                    return false;
                 });
             });
         });

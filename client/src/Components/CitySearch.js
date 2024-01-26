@@ -32,7 +32,7 @@ function CitySearch(props) {
             .then(data => {
                 console.log('city weather result');
                 console.log(data);
-                props.onCityData({'name': name, 'country': country});
+                props.onCityData({'name': name, 'country': country, 'alerts': data.alerts.alert});
             });
     }
 
@@ -63,6 +63,7 @@ function CitySearch(props) {
 
     return (
         <div tabIndex={0} className="WeatherDashboard">
+            <p>Look for weather alerts in any city!</p>
             <input
                 type="text" 
                 className="searchbar"

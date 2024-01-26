@@ -1,0 +1,16 @@
+table, th, td {
+    border: 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    max-width: 150px;
+    text-align: center;
+}
+
+.city-header, table {
+    margin-left: 20px;
+}

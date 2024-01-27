@@ -7,7 +7,7 @@ function CityWeather(props) {
     console.log(props.cityData);
     console.log(props.cityData.alerts);
 
-    return (<div>
+    return (<div className="city-weather">
         <h4 className="city-header">{`${ props.cityData.name }, ${ props.cityData.country }`}</h4>
 
         {props.cityData.alerts.map((alert, idx) => {

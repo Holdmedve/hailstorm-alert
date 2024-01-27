@@ -73,7 +73,7 @@ function CitySearch(props) {
                 onFocus={handleInput}
                 onBlur={handleBlur}
             />
-            <div>
+            <div className="search-suggestions">
                 {suggestions.map((suggestion) => {
                     return (
                         <div 

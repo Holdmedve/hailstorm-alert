@@ -11,6 +11,15 @@ th, td {
     text-align: center;
 }
 
-.city-header, table {
+.city-header, table, .weather-alert {
     margin-left: 20px;
+}
+
+.weather-alert {
+    margin-bottom: 75px;
+}
+
+.weather-alert-item {
+    margin-top: 0px;
+    margin-bottom: 7px;
 }

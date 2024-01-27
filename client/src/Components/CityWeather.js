@@ -8,37 +8,23 @@ function CityWeather(props) {
     console.log(props.cityData.alerts);
 
     return (<div>
-        <h5 className="city-header">{`${ props.cityData.name }, ${ props.cityData.country }`}</h5>
-        <table>
-            <thead>
-                <tr>
-                    <th>Areas</th>
-                    <th>Certainty</th>
-                    <th>Description</th>
-                    <th>Effective</th>
-                    <th>Event</th>
-                    <th>Expires</th>
-                    <th>Instruction</th>
-                    <th>Severity</th>
-                </tr>
-            </thead>
-            <tbody>
-                {props.cityData.alerts.map((alert, idx) => {
-                    return ( 
-                        <tr key={ idx }>
-                            <td>{alert.areas}</td>
-                            <td>{alert.certainty}</td>
-                            <td>{alert.desc}</td>
-                            <td>{alert.effective}</td>
-                            <td>{alert.event}</td>
-                            <td>{alert.expires}</td>
-                            <td>{alert.instruction}</td>
-                            <td>{alert.severity}</td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </table>
+        <h4 className="city-header">{`${ props.cityData.name }, ${ props.cityData.country }`}</h4>
+
+        {props.cityData.alerts.map((alert, idx) => {
+            return (
+                <div className="weather-alert" key={idx}>
+                    <h4>Weather alert {idx}</h4>
+                    <p className="weather-alert-item">Event: {alert.event}</p>
+                    <p className="weather-alert-item">Effective: {alert.effective}</p>
+                    <p className="weather-alert-item">Expires: {alert.expires}</p>
+                    <p className="weather-alert-item">Instruction: {alert.instruction}</p>
+                    <p className="weather-alert-item">Areas: {alert.areas}</p>
+                    <p className="weather-alert-item">Certainty: {alert.certainty}</p>
+                    <p className="weather-alert-item">Description: {alert.description}</p>
+                    <p className="weather-alert-item">Severity: {alert.severity}</p>
+                </div>
+            )
+        })}
     </div>)
 }
 

@@ -1,0 +1,20 @@
+ITERATIONS
+
+1st
+- user searches for cities and view weather data
+- general weather info and alerts can be viewed
+- the displayed data is nice to look at
+- nothing is saved, no db required
+
+2nd
+- user has the option to give an email address and city
+- receives emails about weather alerts to the given city
+    - upon subscription an initial email is received
+        to confirm the action
+- email has unsubscribe link
+- db stores only email addresses and cities
+- recurring job checks cities, sends emails if alert is present
+
+3rd
+- user can register and login
+- city can be selected/modified after login

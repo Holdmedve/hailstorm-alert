@@ -27,22 +27,32 @@ function CityWeather(props) {
         }> 
         </img>
 
-        {props.cityData.alerts.map((alert, idx) => {
-            return (
-                <div className="weather-alert" key={idx}>
-                    <h4>Weather alert {idx}</h4>
-                    <p className="weather-alert-item">Event: {alert.event}</p>
-                    <p className="weather-alert-item">Effective: {alert.effective}</p>
-                    <p className="weather-alert-item">Expires: {alert.expires}</p>
-                    <p className="weather-alert-item">Instruction: {alert.instruction}</p>
-                    <p className="weather-alert-item">Areas: {alert.areas}</p>
-                    <p className="weather-alert-item">Certainty: {alert.certainty}</p>
-                    <p className="weather-alert-item">Description: {alert.description}</p>
-                    <p className="weather-alert-item">Severity: {alert.severity}</p>
-                </div>
-            )
-        })}
+        {weatherAlerts(props)}
     </div>)
+}
+
+
+function weatherAlerts(props) {
+    if (props.cityData.alerts.length === 0) {
+        return (<p>No weather alerts</p>)
+    }
+
+    const alerts = props.cityData.alerts.map((alert, idx) => {
+        return (
+            <div className="weather-alert" key={idx}>
+                <h4>Weather alert {idx}</h4>
+                <p className="weather-alert-item">Event: {alert.event}</p>
+                <p className="weather-alert-item">Effective: {alert.effective}</p>
+                <p className="weather-alert-item">Expires: {alert.expires}</p>
+                <p className="weather-alert-item">Instruction: {alert.instruction}</p>
+                <p className="weather-alert-item">Areas: {alert.areas}</p>
+                <p className="weather-alert-item">Certainty: {alert.certainty}</p>
+                <p className="weather-alert-item">Description: {alert.description}</p>
+                <p className="weather-alert-item">Severity: {alert.severity}</p>
+            </div>
+        )
+    });
+    return alerts;
 }
 
 export default CityWeather;

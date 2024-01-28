@@ -11,9 +11,6 @@ th, td {
     text-align: center;
 }
 
-/* .city-header, table, .weather-alert {
-    margin-left: 20px;
-} */
 
 .weather-alert {
     margin-bottom: 75px;
@@ -26,5 +23,4 @@ th, td {
 
 .city-weather {
     margin-left: 20px;
-
 }

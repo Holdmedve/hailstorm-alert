@@ -11,6 +11,7 @@ class CityModel {
 }
 
 public class CityWeather {
+    public Weather current { get; set; }
     public Dictionary<string, IList<AlertItems>> Alerts { get; set; }
 
     public override string ToString() {
@@ -23,6 +24,18 @@ public class CityWeather {
         }
         return text;
     }
+}
+
+public class Weather {
+    public float Temp_c { get; set; }
+    public int Is_day { get; set; }
+    public WeatherCondition Condition { get; set; }
+}
+
+public class WeatherCondition {
+    public string text { get; set; }
+    public string icon { get; set; }
+    public int code { get; set; }
 }
 
 

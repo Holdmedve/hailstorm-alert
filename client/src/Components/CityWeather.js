@@ -6,9 +6,26 @@ function CityWeather(props) {
     console.log('CityWeather:');
     console.log(props.cityData);
     console.log(props.cityData.alerts);
+    console.log(props.cityData.currentWeather);
+
+    if(props.cityData.name === "") {
+        return
+    }
 
     return (<div className="city-weather">
-        <h4 className="city-header">{`${ props.cityData.name }, ${ props.cityData.country }`}</h4>
+        <h4 className="city-header"> {
+            `${ props.cityData.name }, ${ props.cityData.country }`
+        }</h4>
+
+        <p> {
+            `Current temperature: ${ props.cityData.currentWeather.temp_c } C°`
+        }</p>
+
+        <img src={ 
+            props.cityData.currentWeather.condition.icon.replace(
+                '//cdn.weatherapi.com/weather/64x64/', '') 
+        }> 
+        </img>
 
         {props.cityData.alerts.map((alert, idx) => {
             return (

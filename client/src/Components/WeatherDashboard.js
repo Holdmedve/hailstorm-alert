@@ -6,7 +6,7 @@ import CityWeather from "./CityWeather"
 
 
 function WeatherDashboard() {
-    const [cityData, setCityData] = useState({name: "Shire", country: "Middle-Earth", alerts: []});
+    const [cityData, setCityData] = useState({name: "", country: "", alerts: [], currentWeather: {}});
     return (
         <Fragment>
             <CitySearch onCityData={setCityData}/>

@@ -32,7 +32,12 @@ function CitySearch(props) {
             .then(data => {
                 console.log('city weather result');
                 console.log(data);
-                props.onCityData({'name': name, 'country': country, 'alerts': data.alerts.alert});
+                props.onCityData({
+                    'name': name, 
+                    'country': country, 
+                    'alerts': data.alerts.alert, 
+                    'currentWeather': data.current
+                });
             });
     }
 

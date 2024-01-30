@@ -78,6 +78,11 @@ function CitySearch(props) {
                 onFocus={handleInput}
                 onBlur={handleBlur}
             />
+            <footer>
+                Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">
+                    WeatherAPI.com
+                </a>
+            </footer>
             <div className="search-suggestions">
                 {suggestions.map((suggestion) => {
                     return (

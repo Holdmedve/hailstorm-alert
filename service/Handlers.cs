@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace WeatherAlert;
 
-class Handlers {
+public class Handlers {
     public static async Task<IResult> CitySearch(string query) {
         string apiKey = getWeatherApiKey();
         string searchUri = $"{WEATHER_API_ROOT}/search.json?key={apiKey}&q={query}";

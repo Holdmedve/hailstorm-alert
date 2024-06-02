@@ -23,7 +23,7 @@ class Program {
 
         app.MapGet("/", () => "Hello World!");
         app.MapGet("/city-search/{query}", Handlers.CitySearch);
-        app.MapGet("/city-weather/{cityId}/{numDays}", Handlers.CityWeather);
+        app.MapGet("/city-weather/{cityId}", Handlers.CityWeather);
 
         var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
         var url = $"http://0.0.0.0:{port}";

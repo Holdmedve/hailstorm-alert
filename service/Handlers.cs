@@ -21,10 +21,10 @@ public class Handlers {
         return Results.Ok(cities);
     }
 
-    public static async Task<IResult> CityWeather(string cityId, int numDays) {
+    public static async Task<IResult> CityWeather(string cityId) {
         string apiKey = getWeatherApiKey();
         string searchUri =$"{WEATHER_API_ROOT}/forecast.json?key={apiKey}&q=id:{cityId}" +
-            "&days={numDays}&aqi=no&alerts=yes";
+            "&aqi=no&alerts=yes";
 
         HttpClient client = new HttpClient();
         using HttpResponseMessage response = await client.GetAsync(searchUri);

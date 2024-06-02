@@ -22,7 +22,8 @@ public class CityWeather {
                 text += "\n" + alertItems.ToString();
             }
         }
-        return text;
+
+        return text + "\n" + current.ToString();
     }
 }
 
@@ -30,6 +31,11 @@ public class Weather {
     public float Temp_c { get; set; }
     public int Is_day { get; set; }
     public WeatherCondition Condition { get; set; }
+
+    public override string ToString()
+    {
+        return $"temp_c:\t{Temp_c}\nis_day:\t{Is_day}";
+    }
 }
 
 public class WeatherCondition {

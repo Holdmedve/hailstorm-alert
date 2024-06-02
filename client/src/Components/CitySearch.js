@@ -26,8 +26,7 @@ function CitySearch(props) {
 
     const fetchCityWeather = (cityId, name, country) => {
         console.log(`fetchCityWeather called with cityId: ${ cityId }`);
-        const numDays = 3;
-        fetch(baseUrl() + '/city-weather/' + cityId + '/' + numDays)
+        fetch(baseUrl() + '/city-weather/' + cityId)
             .then(response => response.json())
             .then(data => {
                 console.log('city weather result');

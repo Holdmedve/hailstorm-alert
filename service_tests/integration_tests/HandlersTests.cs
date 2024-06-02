@@ -5,13 +5,15 @@ namespace service_tests;
 
 public class Tests
 {
+    private const string SOPRON_ID = "969557";
+
     [SetUp]
     public void Setup()
     {
     }
 
     [Test]
-    public async Task Test1()
+    public async Task TestCitySearch_GivenSopron_FoundInHungary()
     {
         var result = await Handlers.CitySearch("sopron");
 
@@ -21,5 +23,13 @@ public class Tests
         Assert.NotNull(cities);
         Assert.That(cities.Count, Is.GreaterThan(0));
         Assert.That(cities[0].Country, Is.EqualTo("Hungary"));
+    }
+
+    [Test]
+    public async Task TestCityWeather_GivenCity_ReturnsExpectedModel()
+    {
+        var result = await Handlers.CityWeather(SOPRON_ID);
+
+        Assert.That(result, Is.TypeOf<Ok<CityWeather>>());
     }
 }

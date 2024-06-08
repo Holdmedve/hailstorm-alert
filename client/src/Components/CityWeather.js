@@ -17,7 +17,7 @@ function CityWeather(props) {
             `${ props.cityData.name }, ${ props.cityData.country }`
         }</h4>
 
-        <p> {
+        <p className="city-temperature"> {
             `Current temperature: ${ props.cityData.currentWeather.temp_c } C°`
         }</p>
 
